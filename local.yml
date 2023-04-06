@@ -6,11 +6,11 @@
     
   tasks:
 
+  - name: install packages
+    package: 
+      name: 
+        - htop
   ### Installing multiple packages
-  # - name: install packages
-  #   package: 
-  #     name: 
-  #       - htop
   #       - tmux
   #       - rustup
   #
