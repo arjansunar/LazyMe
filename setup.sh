@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# update and install git 
+sudo apt update && sudo apt upgrade -y && sudo apt install git -y
+
 # install ansible
 sudo apt install ansible
 

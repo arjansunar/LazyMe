@@ -1,15 +1,7 @@
 ## Ansible automated dev env setup
 
-### Steps to run
-
-1. Get updates and git
+### Run the setup script
 
 ```bash
-sudo apt update && sudo apt upgrade -y && sudo apt install git -y
-```
-
-2. Get ansible
-
-```bash
-sudo apt install ansible
+curl -fsSL https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup.sh | sh
 ```
