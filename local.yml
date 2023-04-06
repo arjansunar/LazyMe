@@ -3,13 +3,13 @@
   name: Configuring dev env
   connection: local
   become: true
-  become_user: "{{ lookup('env', 'USER') }}"
+  # become_user: "{{ lookup('env', 'USER') }}"
 
-  pre_tasks:
-    - name: Update repositories
-      ansible.builtin.apt:
-        update_cache: true
-      become_user: root
+  # pre_tasks:
+  #   - name: Update repositories
+  #     ansible.builtin.apt:
+  #       update_cache: true
+  #     become_user: root
   vars:
     user: "{{ ansible_user_id }}"
     home: "{{ lookup('env', 'HOME') }}"
