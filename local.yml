@@ -3,7 +3,21 @@
   connection: local 
   become: true
 
+    
   tasks:
-  - name: install htop
-    package: 
-      name: htop
+
+  ### Installing multiple packages
+  # - name: install packages
+  #   package: 
+  #     name: 
+  #       - htop
+  #       - tmux
+  #       - rustup
+  #
+
+  ## testing running scripts 
+  - name:  run bash scripts
+    ansible.builtin.script:
+      cmd: echo " testing "
+      
+  
