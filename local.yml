@@ -1,23 +1,84 @@
 ---
 - hosts: localhost
-  connection: local 
+  name: Configuring dev env
+  connection: local
   become: true
+  become_user: "{{ lookup('env', 'USER') }}"
 
-    
+  pre_tasks:
+    - name: Update repositories
+      ansible.builtin.apt:
+        update_cache: true
+      become_user: root
+  vars:
+    user: "{{ ansible_user_id }}"
+    home: "{{ lookup('env', 'HOME') }}"
+
   tasks:
+    - name: Install packages
+      ansible.builtin.package:
+        name:
+          - curl
 
-  - name: install packages
-    package: 
-      name: 
-        - htop
-  ### Installing multiple packages
-  #       - tmux
-  #       - rustup
-  #
+    ## installing rustup
+    - name: Check if cargo is installed
+      ansible.builtin.shell: command -v cargo
+      register: cargo_exists
+      changed_when: false
+      ignore_errors: true
 
-  ## testing running scripts 
-  - name:  run bash scripts
-    ansible.builtin.script:
-      cmd: ./scripts/test.sh
-      
-  
+    - name: Download Installer
+      when: cargo_exists is failed
+      ansible.builtin.get_url:
+        url: https://sh.rustup.rs
+        dest: /tmp/sh.rustup.rs
+        mode: "0755"
+        force: "yes"
+      tags:
+        - rust
+
+    - name: Install rust/cargo
+      when: cargo_exists is failed
+      ansible.builtin.command: /tmp/sh.rustup.rs -y
+      changed_when: false
+      tags:
+        - rust
+
+    # version manager for nvim
+    - name: Install bob-nvim
+      when: cargo_exists is success
+      community.general.cargo:
+        name: bob-nvim
+      tags:
+        - nvim
+
+    - name: Install neovim using bob-nvim
+      ansible.builtin.command:
+        cmd: /home/rjan/.cargo/bin/bob install stable
+      changed_when: false
+      tags:
+        - nvim
+
+    # install pnpm
+    - name: Check if pnpm is installed
+      ansible.builtin.shell: command -v pnpm
+      register: pnpm_exists
+      changed_when: false
+      ignore_errors: true
+
+    - name: Download Installer
+      when: pnpm_exists is failed
+      ansible.builtin.get_url:
+        url: https://get.pnpm.io/install.sh
+        dest: /tmp/sh.pnpm.rs
+        mode: "0755"
+        force: "yes"
+      tags:
+        - rust
+
+    - name: Install pnpm
+      when: pnpm_exists is failed
+      ansible.builtin.command: /tmp/sh.pnpm.rs -y
+      changed_when: false
+      tags:
+        - rust
