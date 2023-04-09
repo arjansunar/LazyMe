@@ -22,9 +22,12 @@
     - name: Check if cargo is installed
       ansible.builtin.shell: command -v cargo
       register: cargo_exists
-      changed_when: cargo_exists != 0
+      changed_when: cargo_exists.rc == 0
       failed_when: cargo_exists.rc != 0 and cargo_exists.rc != 127
       ignore_errors: true
+
+    - name: check cargo exists variable
+      debug: var=cargo_exists
 
     - name: Download Installer
       when: cargo_exists is failed
