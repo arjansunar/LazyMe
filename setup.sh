@@ -7,7 +7,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt install git -y
 sudo apt install ansible
 
 # install community general collection
-ansible-galaxy collection install community.general
+# ansible-galaxy collection install community.general
 
 # remove if previously cloned
 rm -rf /tmp/rjan-setup
