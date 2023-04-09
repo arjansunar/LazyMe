@@ -18,3 +18,10 @@ curl -fsSL https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup
 - bob-nvim
 - nvim `stable`
 - pnpm
+
+### TODO
+
+Script must install following dependencies
+
+- build_essentials
+- cmake
