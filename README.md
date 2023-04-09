@@ -3,6 +3,10 @@
 ### Run the setup script
 
 ```bash
+wget -qO- https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup.sh | sh
+```
+
+```bash
 curl -fsSL https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup.sh | sh
 ```
 
