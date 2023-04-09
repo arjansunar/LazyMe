@@ -44,6 +44,7 @@
       ansible.builtin.command: /tmp/sh.rustup.rs -y
       tags:
         - rust
+      # TODO: add a command to source the new env for cargo
 
     # check if bob-nvim is already installed
     - name: Check if bob is installed
