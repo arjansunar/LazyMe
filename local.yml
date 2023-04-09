@@ -2,13 +2,17 @@
 - hosts: localhost
   name: Configuring dev env
   connection: local
-  become: true
 
   vars:
     user: "{{ ansible_user_id }}"
     home: "{{ lookup('env', 'HOME') }}"
 
   tasks:
+    - name: debug specified user's home dir through ansible.env
+      debug: var=ansible_env.HOME
+      become: true
+      become_user: "{{ user }}"
+
     - name: Install packages
       ansible.builtin.package:
         name:
@@ -57,7 +61,7 @@
 
     - name: Install neovim using bob-nvim
       ansible.builtin.command:
-        cmd: /home/rjan/.cargo/bin/bob install stable
+        cmd: /home/{{user}}/.cargo/bin/bob install stable
       changed_when: false
       tags:
         - nvim
