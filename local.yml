@@ -13,7 +13,12 @@
       ansible.builtin.package:
         name:
           - curl
-
+          
+    # install community general
+    - name: Install collection community.general
+      community.general.ansible_galaxy_install:
+      type: collection
+      name: community.general
     ## installing rustup
     - name: Check if cargo is installed
       ansible.builtin.shell: command -v cargo
