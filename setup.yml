@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  name: Testing ansible
+  become: true
+  connection: local
+
+  vars:
+    user: "{{ ansible_user_id }}"
+    home: "{{ lookup('env', 'HOME') }}"
+
+  tasks:
+    - name: Testing ansible commands
+      ansible.builtin.shell: echo "Testing ansible"
+
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+        upgrade: yes

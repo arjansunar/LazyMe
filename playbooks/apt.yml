@@ -1,0 +1,11 @@
+- hosts: "localhost"
+  become: yes
+  tasks:
+    - name: Update apt
+      apt:
+        update_cache: true
+        upgrade: "yes"
+
+    - name: Install htop
+      apt:
+        name: "htop"
