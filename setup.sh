@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # install ansible
-sudo apt install ansible
+apt install ansible git -y
 
 # remove if previously cloned
 rm -rf /tmp/dev-setup
@@ -10,4 +10,4 @@ rm -rf /tmp/dev-setup
 git clone https://github.com/arjansunar/ansible-setup.git /tmp/dev-setup
 
 # run ansible playbook
-ansible-playbook /tmp/rjan-setup/setup.yml --ask-become-pass
+ansible-playbook /tmp/dev-setup/setup.yml --ask-become-pass
