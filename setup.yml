@@ -1,18 +1,4 @@
 ---
-- hosts: localhost
-  name: Testing ansible
-  become: true
-  connection: local
-
-  vars:
-    user: "{{ ansible_user_id }}"
-    home: "{{ lookup('env', 'HOME') }}"
-
-  tasks:
-    - name: Testing ansible commands
-      ansible.builtin.shell: echo "Testing ansible"
-
-    - name: Update apt packages
-      apt:
-        update_cache: yes
-        upgrade: yes
+- import_playbook: playbooks/apt.yml
+- import_playbook: playbooks/cargo.yml
+- import_playbook: playbooks/nvim.yml
