@@ -17,3 +17,7 @@ curl -fsSL https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup
 - rustup toolchain
 - bob-nvim
 - nvim `stable`
+
+## TODO
+
+- [ ] auto add to path during setup
