@@ -22,3 +22,17 @@
       shell: /tmp/sh.rustup.rs -y
       tags:
         - rust
+
+    - name: check if bob-nvim is installed
+      shell: command -v bob
+      register: bob_exists
+      ignore_errors: yes
+
+    - name: Install bob-nvim
+      when: bob_exists is failed
+      shell: cargo install bob-nvim
+      tags:
+        - bob-nvim
+
+    - name: Add bob nvim bins to path
+      shell: export PATH=$PATH:$HOME/.local/share/bob/nvim-bin/

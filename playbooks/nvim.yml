@@ -1,0 +1,12 @@
+- hosts: "localhost"
+  become: yes
+  name: Neovim installation
+  tasks:
+    - name: check if nvim is installed
+      shell: command -v nvim
+      register: nvim_exists
+      ignore_errors: yes
+
+    - name: Download nvim
+      when: nvim_exists is failed
+      shell: bob use stable

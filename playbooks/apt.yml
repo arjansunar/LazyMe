@@ -6,6 +6,8 @@
         update_cache: true
         upgrade: "yes"
 
-    - name: Install htop
+    - name: Install Build tools
       apt:
-        name: "htop"
+        pkg:
+          - "build-essential"
+          - "make"
