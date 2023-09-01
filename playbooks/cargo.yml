@@ -23,9 +23,6 @@
       tags:
         - rust
 
-    - name: Add cargo bins to path
-      shell: export PATH=$PATH:$HOME/.cargo/bin
-
     - name: check if bob-nvim is installed
       shell: command -v bob
       register: bob_exists
@@ -36,6 +33,3 @@
       shell: cargo install bob-nvim
       tags:
         - bob-nvim
-
-    - name: Add bob nvim bins to path
-      shell: export PATH=$PATH:$HOME/.local/share/bob/nvim-bin/

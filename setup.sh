@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# add sources to bashrc
+bash ./source.sh
+
 # install ansible
 apt install ansible git -y
 
