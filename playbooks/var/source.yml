@@ -1,2 +1,3 @@
 ---
 source_bash: ". {{ansible_env.HOME}}/.bashrc"
+source_cargo: ". {{ansible_env.HOME}}/.cargo/env"
