@@ -1,11 +1,18 @@
 - hosts: "localhost"
   become: yes
   name: Cargo installations
+
+  vars_files:
+    - ./var/source.yml
+  vars:
+    cargo_tags: ["cargo", "bob", "nvim"]
+
   tasks:
     - name: check if cargo is installed
-      shell: command -v cargo
+      shell: "{{source_bash}} && command -v cargo"
       register: cargo_exists
       ignore_errors: yes
+      tags: "{{ cargo_tags}}"
 
     - name: Download Installer
       when: cargo_exists is failed
@@ -14,22 +21,26 @@
         dest: /tmp/sh.rustup.rs
         mode: "0755"
         force: "yes"
-      tags:
-        - rust
+      tags: "{{ cargo_tags}}"
 
     - name: Install rust/cargo
       when: cargo_exists is failed
       shell: /tmp/sh.rustup.rs -y
-      tags:
-        - rust
+      tags: "{{ cargo_tags}}"
+
+    - name: Check cargo is installed
+      shell: "{{source_bash}} && command -v cargo"
+      register: cargo_exists
+      ignore_errors: yes
+      tags: "{{ cargo_tags}}"
 
     - name: check if bob-nvim is installed
-      shell: command -v bob
+      shell: "{{source_bash}} && command -v bob"
       register: bob_exists
       ignore_errors: yes
+      tags: "{{ cargo_tags}}"
 
     - name: Install bob-nvim
       when: bob_exists is failed
-      shell: cargo install bob-nvim
-      tags:
-        - bob-nvim
+      shell: "{{source_bash}} && cargo install bob-nvim"
+      tags: "{{ cargo_tags}}"

@@ -1,0 +1,2 @@
+---
+source_bash: ". {{ansible_env.HOME}}/.bashrc"

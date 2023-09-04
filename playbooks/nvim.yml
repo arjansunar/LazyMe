@@ -1,12 +1,16 @@
 - hosts: "localhost"
   become: yes
   name: Neovim installation
+
+  vars_files:
+    - ./var/source.yml
+
   tasks:
     - name: check if nvim is installed
-      shell: command -v nvim
+      shell: "{{source_bash}} && command -v nvim"
       register: nvim_exists
       ignore_errors: yes
 
     - name: Download nvim
       when: nvim_exists is failed
-      shell: bob use stable
+      shell: "{{source_bash}} && bob use stable"
