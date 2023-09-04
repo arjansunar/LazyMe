@@ -10,6 +10,12 @@ wget -qO- https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup.
 curl -fsSL https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup.sh | sh
 ```
 
+- Source bashrc
+  > The script makes changes to bashrc.
+  ```bash
+  source $HOME/.bashrc
+  ```
+
 ### Packages it installs
 
 - curl
@@ -20,4 +26,5 @@ curl -fsSL https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup
 
 ## TODO
 
-- [ ] auto add to path during setup
+- [x] auto add to path during setup
+  > Its been done by sourcing [bashrc](./playbooks/var/source.yml) before each command
