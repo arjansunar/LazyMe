@@ -11,3 +11,9 @@
         pkg:
           - "build-essential"
           - "make"
+          - "ripgrep"
+          - "fzf"
+          - "tmux"
+          - "xclip"
+          - "tldr"
+          - "python3"
