@@ -1,6 +1,20 @@
-## Ansible automated dev env setup
+## 😴 LazyMe
 
-### Run the setup script
+Setup your entire dev env with few steps as possible. Uses Ansible to automate installing
+most used packages.
+
+Feel free to customize this to exactly suit your personal needs.
+
+## 📦 Current packages
+
+- [ ] docker
+- [x] curl
+- [x] make
+- [x] build essentials
+- [ ] node
+- [x] python3
+
+### 🏃 Run the setup script
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup.sh | sh
@@ -23,8 +37,3 @@ curl -fsSL https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup
 - rustup toolchain
 - bob-nvim
 - nvim `stable`
-
-## TODO
-
-- [x] auto add to path during setup
-  > Its been done by sourcing [bashrc](./playbooks/var/source.yml) before each command
