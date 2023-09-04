@@ -17,11 +17,11 @@ Feel free to customize this to exactly suit your personal needs.
 ### 🏃 Run the setup script
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup.sh | sh
+wget -qO- https://raw.githubusercontent.com/arjansunar/LazyMe/main/setup.sh | sh
 ```
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/arjansunar/ansible-setup/main/setup.sh | sh
+curl -fsSL https://raw.githubusercontent.com/arjansunar/LazyMe/main/setup.sh | sh
 ```
 
 - Source bashrc
