@@ -1,0 +1,37 @@
+---
+- name: Install Go 🏃
+  hosts: "localhost"
+
+  vars:
+    go_tags: ["go"]
+    go_version: "1.21.0"
+
+  tasks:
+    - name: Get binary
+      get_url:
+        url: https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz
+        dest: /tmp/go.tar.gz
+        mode: "0755"
+        force: "yes"
+
+    - name: Install go
+      unarchive:
+        src: /tmp/go.tar.gz
+        dest: /usr/local
+
+    - debug:
+        msg: "{{ansible_env}}"
+
+    - name: ⏯️  Add go to path
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        line: "{{ item }}"
+      with_items:
+        - "\n# --------- ⏭️  GO paths by 😴-----------"
+        - "export PATH=$PATH:/usr/local/go/bin"
+        - 'export GOPATH="$HOME/go/"'
+        - 'export GOBIN="$GOPATH/bin"'
+        - 'export PATH="$PATH:$GOBIN"'
+        - "# --------- ⏺️  GO paths by 😴-----------"
+
+      tags: "{{ go_tags }}"

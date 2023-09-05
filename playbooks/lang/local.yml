@@ -1,5 +1,4 @@
 ---
-- name: Rust toolchain
-  import_playbook: ./rust/local.yml
-- name: Install node and nvm
-  import_playbook: ./javascript/local.yml
+- import_playbook: ./rust/local.yml
+- import_playbook: ./javascript/local.yml
+- import_playbook: ./go/local.yml
