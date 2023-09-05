@@ -4,3 +4,4 @@
 - import_playbook: playbooks/cargo.yml
 - import_playbook: playbooks/nvim.yml
 - import_playbook: playbooks/nvm.yml
+- import_playbook: playbooks/shell/fish.yml
