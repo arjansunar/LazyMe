@@ -1,0 +1,51 @@
+---
+- hosts: "localhost"
+  become: yes
+  tasks:
+    - name: Docker dependencies
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: true
+      loop:
+        - gnupg
+        - ca-certificates
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: true
+      loop:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+
+    - name: Ensure group "docker" exists
+      ansible.builtin.group:
+        name: docker
+        state: present
+
+    - name: Get current user name
+      command: whoami
+      register: current_user
+      changed_when: false
+      check_mode: no
+
+    - name: Add current user to a group
+      user:
+        name: "{{ current_user.stdout }}"
+        groups: docker
+        append: yes

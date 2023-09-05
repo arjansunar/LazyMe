@@ -1,4 +1,6 @@
 ---
 - import_playbook: playbooks/apt.yml
+- import_playbook: playbooks/docker.yml
 - import_playbook: playbooks/cargo.yml
 - import_playbook: playbooks/nvim.yml
+- import_playbook: playbooks/nvm.yml

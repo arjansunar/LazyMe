@@ -7,11 +7,11 @@ Feel free to customize this to exactly suit your personal needs.
 
 ## 📦 Current packages
 
-- [ ] docker
+- [x] docker
 - [x] curl
 - [x] make
 - [x] build essentials
-- [ ] node
+- [x] node
 - [x] python3
 
 ### 🏃 Run the setup script

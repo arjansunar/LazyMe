@@ -1,0 +1,36 @@
+---
+- name: Install nvm
+  hosts: localhost
+  vars_files:
+    - ./var/source.yml
+  vars:
+    nvm_tags: ["node", "nvm", "npm"]
+  tasks:
+    - name: Check if NVM is installed
+      shell: "{{source_bash}} && command -v nvm"
+      register: nvm_exists
+      ignore_errors: yes
+      tags: "{{ nvm_tags }}"
+
+    - name: Download Installer
+      when: nvm_exists is failed
+      get_url:
+        url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh
+        dest: /tmp/sh.nvm.sh
+        mode: "0755"
+        force: "yes"
+      tags: "{{ nvm_tags }}"
+
+    - name: Install nvm
+      ansible.builtin.shell: >
+        . /tmp/sh.nvm.sh
+      args:
+        executable: /bin/bash
+      tags: "{{ nvm_tags }}"
+
+    - name: Install Node.js using nvm
+      shell: "{{ source_nvm }} && nvm install node && nvm use node"
+      args:
+        creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+        chdir: "{{ ansible_env.HOME }}"
+        executable: /bin/bash
