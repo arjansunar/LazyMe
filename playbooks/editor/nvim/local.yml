@@ -1,0 +1,4 @@
+---
+- import_playbook: ../../lang/rust/local.yml
+- import_playbook: ./bob.yml
+- import_playbook: ./nvim.yml

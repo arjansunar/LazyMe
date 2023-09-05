@@ -1,0 +1,6 @@
+- name: Install apt dependencies
+  apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - "build-essential"

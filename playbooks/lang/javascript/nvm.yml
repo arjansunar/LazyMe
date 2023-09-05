@@ -2,7 +2,7 @@
 - name: Install nvm
   hosts: localhost
   vars_files:
-    - ./var/source.yml
+    - ../../var/source.yml
   vars:
     nvm_tags: ["node", "nvm", "npm"]
   tasks:
@@ -22,6 +22,7 @@
       tags: "{{ nvm_tags }}"
 
     - name: Install nvm
+      when: nvm_exists is failed
       ansible.builtin.shell: >
         . /tmp/sh.nvm.sh
       args:
@@ -34,3 +35,9 @@
         creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
         chdir: "{{ ansible_env.HOME }}"
         executable: /bin/bash
+
+    - name: Add nvm to path ⏯️
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        line: "{{ source_nvm }}"
+      tags: "{{ nvm_tags }}"

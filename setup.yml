@@ -1,7 +1,6 @@
 ---
 - import_playbook: playbooks/apt.yml
 - import_playbook: playbooks/docker.yml
-- import_playbook: playbooks/cargo.yml
-- import_playbook: playbooks/nvim.yml
-- import_playbook: playbooks/nvm.yml
-- import_playbook: playbooks/shell/fish.yml
+- import_playbook: playbooks/lang/local.yml
+- import_playbook: playbooks/editor/nvim/local.yml
+- import_playbook: playbooks/shell/fish/local.yml

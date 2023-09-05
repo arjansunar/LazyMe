@@ -3,7 +3,7 @@
   name: Neovim installation
 
   vars_files:
-    - ./var/source.yml
+    - ../../var/source.yml
 
   tasks:
     - name: check if nvim is installed

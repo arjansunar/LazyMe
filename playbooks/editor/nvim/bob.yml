@@ -1,0 +1,30 @@
+- hosts: "localhost"
+  become: yes
+  name: Bob installations
+
+  vars_files:
+    - ../../var/source.yml
+  vars:
+    bob_tags: ["bob", "nvim"]
+
+  pre_tasks:
+    - name: Dependencies for bob
+      include_tasks: _dependencies.yml
+
+  tasks:
+    - name: check if bob-nvim is installed
+      shell: "{{source_bash}} && command -v bob"
+      register: bob_exists
+      ignore_errors: yes
+      tags: "{{ bob_tags}}"
+
+    - name: Install bob-nvim
+      when: bob_exists is failed
+      shell: "{{source_bash}} && cargo install bob-nvim"
+      tags: "{{ bob_tags}}"
+
+    - name: Add bob-nvim bin to PATH
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        line: "export PATH=$PATH:$HOME/.local/share/bob/nvim-bin/ # by 😴"
+      tags: "{{ bob_tags}}"

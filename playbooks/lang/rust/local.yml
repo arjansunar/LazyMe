@@ -1,11 +1,11 @@
 - hosts: "localhost"
   become: yes
-  name: Cargo installations
+  name: Install rust toolchains
 
   vars_files:
-    - ./var/source.yml
+    - ../../var/source.yml
   vars:
-    cargo_tags: ["cargo", "bob", "nvim"]
+    cargo_tags: ["rust", "cargo"]
 
   tasks:
     - name: check if cargo is installed
@@ -32,15 +32,4 @@
       shell: "{{source_bash}} && command -v cargo"
       register: cargo_exists
       ignore_errors: yes
-      tags: "{{ cargo_tags}}"
-
-    - name: check if bob-nvim is installed
-      shell: "{{source_bash}} && command -v bob"
-      register: bob_exists
-      ignore_errors: yes
-      tags: "{{ cargo_tags}}"
-
-    - name: Install bob-nvim
-      when: bob_exists is failed
-      shell: "{{source_bash}} && cargo install bob-nvim"
       tags: "{{ cargo_tags}}"
