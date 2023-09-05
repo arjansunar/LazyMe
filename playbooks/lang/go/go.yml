@@ -19,9 +19,6 @@
         src: /tmp/go.tar.gz
         dest: /usr/local
 
-    - debug:
-        msg: "{{ansible_env}}"
-
     - name: ⏯️  Add go to path
       lineinfile:
         path: "{{ ansible_env.HOME }}/.bashrc"
