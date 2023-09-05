@@ -1,0 +1,40 @@
+---
+- hosts: "localhost"
+  become: yes
+  vars:
+    fish_tags: ["fish", "terminal", "shell"]
+
+  pre_tasks:
+    - name: Install fish Dependencies
+      apt:
+        name: gnupg
+        update_cache: true
+
+  tasks:
+    - name: Check if fish is installed
+      shell: "command -v fish"
+      register: fish_exists
+      ignore_errors: true
+
+    - name: Add fish repository
+      when: fish_exists is failed
+      apt_repository:
+        repo: ppa:fish-shell/release-3
+        state: present
+      tags: "{{ fish_tags }}"
+
+    - name: Update apt and install fish
+      when: fish_exists is failed
+      apt:
+        name: fish
+        state: latest
+        update_cache: true
+      tags: "{{ fish_tags }}"
+
+    - name: Add fish to list of shells
+      shell: "command -v fish | tee -a /etc/shells"
+      become: true
+
+    - name: Make fish default shell for current user
+      shell: "chsh -s $(which fish) $USER"
+      become: true
