@@ -30,10 +30,34 @@ curl -fsSL https://raw.githubusercontent.com/arjansunar/LazyMe/main/setup.sh | s
   source $HOME/.bashrc
   ```
 
-### Packages it installs
+### Available plays and plays Todo
 
-- curl
-- git
-- rustup toolchain
-- bob-nvim
-- nvim `stable`
+- Shell
+  - [x] fish
+  - [ ] zsh
+- System Packages
+  - [x] curl
+  - [x] make
+  - [x] tmux
+  - [x] ripgrep
+  - [x] exa
+  - [x] pass
+- Language
+  - Rust
+    - [x] cargo & rustup
+      - [x] bob-nvim
+  - Python
+    - [x] python3
+    - [x] pip
+  - Javascript
+    - [x] node
+    - [x] nvm
+- Editor
+  - [x] nvim `stable`
+  - [ ] lazygit
+  - [ ] configuration
+- Terminal
+  - [ ] Alacritty
+- Dotfiles
+  - [ ] stow
+  - [ ] dotfiles directory
