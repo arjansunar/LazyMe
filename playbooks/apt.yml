@@ -8,12 +8,16 @@
 
     - name: Install Build tools
       apt:
-        pkg:
-          - "build-essential"
-          - "make"
-          - "ripgrep"
-          - "fzf"
-          - "tmux"
-          - "xclip"
-          - "tldr"
-          - "python3"
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - "build-essential"
+        - "make"
+        - "ripgrep"
+        - "fzf"
+        - "tmux"
+        - "xclip"
+        - "tldr"
+        - "python3"
+        - "pass"
+        - "exa"
