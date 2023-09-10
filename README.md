@@ -61,3 +61,7 @@ curl -fsSL https://raw.githubusercontent.com/arjansunar/LazyMe/main/setup.sh | s
 - Dotfiles
   - [ ] stow
   - [ ] dotfiles directory
+
+### Future plans
+
+- [ ] Look into roles to install package managers and langs
