@@ -2,22 +2,38 @@
 - name: Install Go 🏃
   hosts: "localhost"
 
+  vars_files:
+    - "../../var/lang.yml"
+
   vars:
     go_tags: ["go"]
     go_version: "1.21.0"
 
   tasks:
+    - name: Check if go binary is downloaded
+      stat:
+        path: "/tmp/go.tar.gz"
+      ignore_errors: true
+      register: go_binary
+
     - name: Get binary
+      when: go_binary.stat.exists == false
       get_url:
         url: https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz
         dest: /tmp/go.tar.gz
         mode: "0755"
         force: "yes"
 
+    - name: Create go dir
+      file:
+        path: "{{ lang_dir }}"
+        state: directory
+
     - name: Install go
       unarchive:
         src: /tmp/go.tar.gz
-        dest: /usr/local
+        dest: "{{ lang_dir }}"
+      become_user: root
 
     - name: ⏯️  Add go to path
       lineinfile:
@@ -25,7 +41,7 @@
         line: "{{ item }}"
       with_items:
         - "\n# --------- ⏭️  GO paths by 😴-----------"
-        - "export PATH=$PATH:/usr/local/go/bin"
+        - "export PATH=$PATH:{{ lang_dir }}/go/bin"
         - 'export GOPATH="$HOME/go/"'
         - 'export GOBIN="$GOPATH/bin"'
         - 'export PATH="$PATH:$GOBIN"'

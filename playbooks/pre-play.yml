@@ -1,0 +1,17 @@
+---
+- name: Pre play 🚧
+  hosts: "localhost"
+
+  vars_files:
+    - "./var/lang.yml"
+
+  tasks:
+    - name: Make sure bashrc exists
+      file:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        state: touch
+
+    - name: Make lang dirs
+      file:
+        path: "{{ lang_dir }}"
+        state: directory
