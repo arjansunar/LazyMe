@@ -15,6 +15,7 @@
         path: "/tmp/go.tar.gz"
       ignore_errors: true
       register: go_binary
+      tags: "{{ go_tags }}"
 
     - name: Get binary
       when: go_binary.stat.exists == false
@@ -23,17 +24,20 @@
         dest: /tmp/go.tar.gz
         mode: "0755"
         force: "yes"
+      tags: "{{ go_tags }}"
 
     - name: Create go dir
       file:
         path: "{{ lang_dir }}"
         state: directory
+      tags: "{{ go_tags }}"
 
     - name: Install go
       unarchive:
         src: /tmp/go.tar.gz
         dest: "{{ lang_dir }}"
       become_user: root
+      tags: "{{ go_tags }}"
 
     - name: ⏯️  Add go to path
       lineinfile:
@@ -46,5 +50,4 @@
         - 'export GOBIN="$GOPATH/bin"'
         - 'export PATH="$PATH:$GOBIN"'
         - "# --------- ⏺️  GO paths by 😴-----------"
-
       tags: "{{ go_tags }}"
